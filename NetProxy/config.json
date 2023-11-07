@@ -1,0 +1,9 @@
+﻿{
+  "http": {
+    "protocol": "tcp",
+    "localIp": "127.0.0.1",
+    "localPort": 7801,
+    "forwardIp": "92.100.159.246",
+    "forwardPort": 7801
+  }
+}

@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeraServerProxy", "TeraServerProxy\TeraServerProxy.csproj", "{D6EB2E31-6A93-4AD9-9513-8D433E7C7325}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeraServerProxyGUI", "TeraServerProxyGUI\TeraServerProxyGUI.csproj", "{7E63F090-0F40-4EA6-8432-B5191634CD65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetProxy", "NetProxy\NetProxy.csproj", "{4D941979-A60A-484A-9EB3-9136FD3208EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeraCore", "TeraCore\TeraCore.csproj", "{DA006526-EB0D-4E8A-A34C-BD24B8CAB1CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6EB2E31-6A93-4AD9-9513-8D433E7C7325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6EB2E31-6A93-4AD9-9513-8D433E7C7325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6EB2E31-6A93-4AD9-9513-8D433E7C7325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6EB2E31-6A93-4AD9-9513-8D433E7C7325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E63F090-0F40-4EA6-8432-B5191634CD65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E63F090-0F40-4EA6-8432-B5191634CD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E63F090-0F40-4EA6-8432-B5191634CD65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D941979-A60A-484A-9EB3-9136FD3208EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D941979-A60A-484A-9EB3-9136FD3208EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D941979-A60A-484A-9EB3-9136FD3208EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D941979-A60A-484A-9EB3-9136FD3208EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA006526-EB0D-4E8A-A34C-BD24B8CAB1CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA006526-EB0D-4E8A-A34C-BD24B8CAB1CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA006526-EB0D-4E8A-A34C-BD24B8CAB1CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA006526-EB0D-4E8A-A34C-BD24B8CAB1CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2419EF95-2460-435B-9283-C83C4CC21B50}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DungeonMatching>
+	<!-- 각 클래스별 포지션 정의 1은 딜러, 0는 탱커, 2은 힐러 차례로, 기본 선택 포지션, 선택 가능 포지션을 3개까지 설정! -->
+	<ClassPosition>
+		<Class name="Warrior" defaultPosition="1" secondPosition="0" thirdPosition="1"/>
+		<Class name="Lancer" defaultPosition="0" secondPosition="0" thirdPosition="0"/>
+		<Class name="Slayer" defaultPosition="1" secondPosition="1" thirdPosition="1"/>
+		<Class name="Berserker" defaultPosition="1" secondPosition="0" thirdPosition="1" secondPositionLevel="65"/>
+		<Class name="Sorcerer" defaultPosition="1" secondPosition="1" thirdPosition="1"/>
+		<Class name="Archer" defaultPosition="1" secondPosition="1" thirdPosition="1"/>
+		<Class name="Priest" defaultPosition="2" secondPosition="2" thirdPosition="2"/>
+		<Class name="Elementalist" defaultPosition="2" secondPosition="2" thirdPosition="2"/>
+		<Class name="Soulless" defaultPosition="1" secondPosition="1" thirdPosition="1" />
+		<Class name="Engineer" defaultPosition="1" secondPosition="1" thirdPosition="1"/>
+		<Class name="Fighter" defaultPosition="0" secondPosition="1" thirdPosition="0" secondPositionLevel="69"/>
+		<Class name="Assassin" defaultPosition="1" secondPosition="1" thirdPosition="1"/>
+		<Class name="Glaiver" defaultPosition="1" secondPosition="1" thirdPosition="1"/>
+	</ClassPosition>
+
+	<!-- 발키온 소집 명령, 추가 모집에 응한 캐릭터가 받는 보상, 던전 클리어 보너스 보상 그리고 보상을 보내는 우편의 내용 정의 !-->
+	<Compensation>
+		<PositionCall addItemTemplateId="" addItemAmount=""/>
+		<PositionCallMail sender="@DungeonMatchingMail:10" title="@DungeonMatchingMail:11" body="@DungeonMatchingMail:12"/>
+		<AddEntry addItemTemplateId="" addItemAmount=""/>
+		<AddEntryMail sender="@DungeonMatchingMail:20" title="@DungeonMatchingMail:21" body="@DungeonMatchingMail:22"/>
+		<!-- 던전 클리어 보상의 경우 UI에 보여주기 위한 아이템을 지정한다. 실제로는 인던별로 지정한 아이템 지급 !-->
+		<DungeonClear addItemTemplateId="" addItemAmount=""/>
+		<DungeonClearMail sender="@DungeonMatchingMail:30" title="@DungeonMatchingMail:31" body="@DungeonMatchingMail:32"/>
+		<!-- 성장 구간 인던 지원 시스템 테스트용 
+		<SupportMatchingClear addItemTemplateId="96474" addItemAmount="1"/>
+		<SupportMatchingClearMail sender="@DungeonMatchingMail:30" title="@DungeonMatchingMail:31" body="@DungeonMatchingMail:32"/>-->
+		</Compensation>
+	
+	<PartyMatchBonus/>
+	<!--<Bonus countOfRegistration="1" classGroup="defence" abnormalityId="4800"/>
+		<Bonus countOfRegistration="1" classGroup="attack" abnormalityId="4801"/>
+		<Bonus countOfRegistration="1" classGroup="heal" abnormalityId="4802"/>
+		<Bonus countOfRegistration="2" classGroup="defence" abnormalityId="4800"/>
+		<Bonus countOfRegistration="2" classGroup="attack" abnormalityId="4801"/>
+		<Bonus countOfRegistration="2" classGroup="heal" abnormalityId="4802"/>
+		<Bonus countOfRegistration="3" classGroup="defence" abnormalityId="4810"/>
+		<Bonus countOfRegistration="3" classGroup="attack" abnormalityId="4811"/>
+		<Bonus countOfRegistration="3" classGroup="heal" abnormalityId="4812"/>
+		<Bonus countOfRegistration="4" classGroup="defence" abnormalityId="4820"/>
+		<Bonus countOfRegistration="4" classGroup="attack" abnormalityId="4821"/>
+		<Bonus countOfRegistration="4" classGroup="heal" abnormalityId="4822"/>
+	</PartyMatchBonus>-->
+
+	<Penalty withdrawalAbnormalitySec="180" withdrawalAbnormalityId="999994"/>
+
+	<!-- 잊혀진 인던 탐험대 쿨타임 (WorldData@SupportMatching을 WorldData에 있는 것이 부적절하다고 판단되어 데이터 이동)-->  
+	<SupportMatchingEnterLimit enterLimitCount="100" enterLimitCountForAccountTrait="100" />
+	
+	<!-- 성장 구간 인던 지원 시스템 --> <!-- 마공사 적용될 때 삭제 -->
+	<!-- <SupportMatching id="9999" dungeonMinLevel="60" dungeonMaxLevel="70" increaseSupportUserTime="60" maxSupportUser="2">
+		<MatchingDungeon id="9087" name="비밀 기지"/>
+		<MatchingDungeon id="9088" name="밤피르 저택"/>
+		<MatchingDungeon id="9089" name="사교도 은신처"/>
+		<MatchingDungeon id="9071" name="사령술 연구소"/>
+		<MatchingDungeon id="9072" name="황금의 미궁"/> -->
+		<!--<MatchingDungeon id="9093" name="아카샤의 은신처"/> 던전 매칭에서 삭제 -->
+		<!-- <MatchingDungeon id="9094" name="살레론의 공중정원"/> -->
+		<!-- <MatchingDungeon id="9076" name="공포의 미궁"/>
+		<MatchingDungeon id="9073" name="검은 탑"/>
+	</SupportMatching> -->
+	
+	<!-- 던전ID, 던전매칭 최소~ 최대 레벨,  최소 장비 레벨, 필요아이템(최대3종), 완료 조건(최대3종 지정가능)!-->
+    <!-- 테스트 용으로 일단 비밀기지, 아카샤(하급),비비슈  !-->
+	<!-- 아이템 레벨은 인던 난이도가 높은 경우에만 거는 것이 아니고, 모든 인던에 걸어야 함. 난이도 낮은 인던에는 좀 아래로 여유있게 거는 방식으로. -->
+	<!-- 현재 보상 아이템 2배 들어가 있음(이벤트, 토큰만 2배)  !-->
+	<!-- hide="true"일 경우 해당 인던은 던전매칭 UI에서 보이지 않음(던전매칭 사용 불가). 캐릭터창의 인던전적정보창에는 hide="true"된 인던의 전적정보도 보여줌 -->
+
+<!-- 성장구간 던전의 matchingRoleId="23" 은 탱커 없이 던전 매칭 가능하도록 구현 된 룰임. 기존 17번 사용했었음. 비밀기지, 밤피르, 자바르만, 사교도, 사령술, 황미, 살레론, 공미, 검탑에 적용됨  -->    
+	<Dungeon id="9087" name="비밀기지" dungeonLevel="20" dungeonMinLevel="20" dungeonMaxLevel="25" minItemLevel="51" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="408" itemAmount="1"/>
+		
+	</Dungeon>
+	<Dungeon id="9088" name="밤피르 저택" dungeonLevel="26" dungeonMinLevel="26" dungeonMaxLevel="31" minItemLevel="66" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="408" itemAmount="1"/>
+		
+	</Dungeon>
+	<Dungeon id="9979" name="자바르만 소굴" dungeonLevel="32" dungeonMinLevel="32" dungeonMaxLevel="36" minItemLevel="77" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="408" itemAmount="1"/>		
+		<ClearCondition huntingZoneId="979" templateId="47954" amount="1" killCount="1" />
+	</Dungeon>
+	<Dungeon id="9089" name="사교도 은신처" dungeonLevel="35" dungeonMinLevel="35" dungeonMaxLevel="42" minItemLevel="96" matchingRoleId="32">
+		<!-- 필수 아이템이 필수가 아니게 되어 제거 -->
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="409" itemAmount="1"/>
+		
+	</Dungeon>
+	<Dungeon id="9071" name="사령술 연구소" dungeonLevel="41" dungeonMinLevel="41" dungeonMaxLevel="47" minItemLevel="118" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="409" itemAmount="1"/>
+		
+	</Dungeon>
+	<Dungeon id="9072" name="황금의 미궁" dungeonLevel="48" dungeonMinLevel="48" dungeonMaxLevel="53" minItemLevel="146" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="410" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9093" name="아카샤의 은신처" dungeonLevel="48" dungeonMinLevel="48" dungeonMaxLevel="54" minItemLevel="146" matchingRoleId="23">
+		<NeedItem id="103"/>
+		<DungeonClearCompensation itemTemplateId="410" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9793" name="아카샤의 은신처(상급)" dungeonLevel="48" dungeonMinLevel="48" dungeonMaxLevel="56" minItemLevel="110">
+		<NeedItem id="103"/>
+		<DungeonClearCompensation itemTemplateId="410" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="54" itemAmount="12"/>
+	</Dungeon>
+	<Dungeon id="9094" name="살레론의 공중정원" dungeonLevel="53" dungeonMinLevel="53" dungeonMaxLevel="57" minItemLevel="166" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="410" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9076" name="공포의 미궁" dungeonLevel="56" dungeonMinLevel="56" dungeonMaxLevel="58" minItemLevel="200" matchingRoleId="32">
+		<NeedItem id="5126"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9073" name="Эбеновая Башня" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="60" minItemLevel="200" matchingRoleId="32">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9075" name="Гнездо Келсаика" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="64" minItemLevel="200" matchingRoleId="23">
+		<NeedItem id="5123"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+	</Dungeon>
+<!-- T3+ 인던 리스트를 12월 1일 업데이트 버젼 되기 전까지 임시로 제거 시켰던 것을 본래대로 활성화 -->
+	<!--Dungeon id="9079" name="자바르만 둠" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="61" minItemLevel="134">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="356" itemAmount="2"/>
+	</Dungeon-->
+	<Dungeon id="9080" name="Знак Адстринго" dungeonLevel="58" dungeonMinLevel="60" dungeonMaxLevel="63" minItemLevel="134">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="356" itemAmount="2"/>
+	</Dungeon>
+	<Dungeon id="9082" name="철벽의 수련장" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="63" minItemLevel="124" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="356" itemAmount="2"/>
+	</Dungeon>
+	<Dungeon id="9773" name="Эбеновая Башня (Сложно)" dungeonLevel="62" dungeonMinLevel="64" dungeonMaxLevel="65" minItemLevel="131">
+		<NeedItem id="5127"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="356" itemAmount="2"/>
+	</Dungeon>
+	<!--Dungeon id="9775" name="켈사이크의 둥지(상급)" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="63" minItemLevel="132">
+		<NeedItem id="5123"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="356" itemAmount="2"/>
+	</Dungeon-->
+	<!--Dungeon id="9776" name="공포의 미궁(상급)" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="63" minItemLevel="131">
+		<NeedItem id="5126"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="356" itemAmount="2"/>
+	</Dungeon-->
+	<Dungeon id="9078" name="비비슈의 실험실" dungeonLevel="58" dungeonMinLevel="58" dungeonMaxLevel="63" minItemLevel="126">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="346" itemAmount="20"/>
+	</Dungeon>
+	<!--<Dungeon id="9024" name="버려진 회당" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="138" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="2"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+		<ClearCondition huntingZoneId="424" templateId="2000" amount="1" killCount="1" />
+	</Dungeon>-->
+	<Dungeon id="9025" name="발더의 신전" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="64" minItemLevel="242" matchingRoleId="23">
+		<NeedItem id="45323"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="2"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--<Dungeon id="9724" name="버려진 회당(상급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="142">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+		<ClearCondition huntingZoneId="724" templateId="2000" amount="1" killCount="1" />
+	</Dungeon>-->
+	<!--<Dungeon id="9725" name="발더의 신전(상급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="142">
+		<NeedItem id="45323"/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+		<ClearCondition huntingZoneId="725" templateId="8005" amount="1" killCount="1" />
+	</Dungeon>-->
+	<!-- <Dungeon id="9095" name="업화의 구덩이" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="142">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	<!-- <Dungeon id="9096" name="실유카의 회랑" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="147">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="" itemAmount=""/>
+	</Dungeon> -->
+	<Dungeon id="9026" name="아르곤 멜디티아(하급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="64" minItemLevel="242" matchingRoleId="23">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9726" name="아르곤 멜디티아(상급)" dungeonLevel="60" dungeonMinLevel="66" dungeonMaxLevel="70" minItemLevel="147">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+		<ClearCondition huntingZoneId="726" templateId="20000" amount="1" killCount="1" />
+	</Dungeon-->
+	<!-- <Dungeon id="9027" name="샨드라 마나이아(상급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="153">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	<Dungeon id="9727" name="샨드라 마나이아(하급)" dungeonLevel="64" dungeonMinLevel="64" dungeonMaxLevel="65" minItemLevel="309" matchingRoleId="23">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!-- newbieBonusOff "true"이면 해당 던젼에 대해 '벨릭의 풍요로운 축복' 이상상태 안보이고, 캐릭터 옆 '나비' 안보임. 파라미터가 없으면 false와 같음 -->
+	<!-- <Dungeon id="9975" name="폭주한 켈사이크의 성소(상급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="153" matchingRoleId="8">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+	</Dungeon> -->
+	<!-- <Dungeon id="9911" name="불안정한 켈사이크의 성소(하급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="147" matchingRoleId="7">
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+	</Dungeon> -->
+	<Dungeon id="9777" name="Каналы" dungeonLevel="66" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="444" matchingRoleId="11">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9034" name="Жуткий Шпиль Страха" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="482" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9766" name="Погибший Флот" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--<Dungeon id="9825" name="발더의 신전 1인" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="138"  matchingRoleId="14">
+		<ClearCondition huntingZoneId="825" templateId="6000" amount="1" killCount="1" />
+	</Dungeon>-->
+	<!-- <Dungeon id="9043" name="마법사의요새(상급)" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="159" matchingRoleId="13">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	<!--Dungeon id="9643" name="마법사의요새(상급) Lv.65" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="409" matchingRoleId="26">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<!-- <Dungeon id="9743" name="마법사의요새(하급)" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="171" matchingRoleId="13">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	<!-- <Dungeon id="9050" name="탐욕의 카슈바르 협곡" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="164" matchingRoleId="15">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	 <!--Dungeon id="9750" name="카슈바르 협곡" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="174" matchingRoleId="15">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon--> 
+	<!-- <Dungeon id="9053" name="거인의 숲" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="153"  matchingRoleId="12">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	<!-- <Dungeon id="9811" name="어둠의 동굴" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="159"  matchingRoleId="12">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon> -->
+	<!-- <Dungeon id="9810" name="라칸의 제단" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="159"  matchingRoleId="1">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon> -->
+	<!--Dungeon id="9711" name="포악한 퀴르갈의 동굴" dungeonLevel="60" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="175"  matchingRoleId="1">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon-->
+	<!--Dungeon id="9611" name="포악한 퀴르갈의 동굴" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="409"  matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon-->
+	<!--<Dungeon id="9511" name="어둠의 동굴" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="412"  matchingRoleId="28">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>-->
+	<!--
+	<Dungeon id="9808" name="아크데바 무기고" dungeonLevel="61" dungeonMinLevel="60" dungeonMaxLevel="70" minItemLevel="302" matchingRoleId="23" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon> -->
+	<Dungeon id="9809" name="데모크론 실험실" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="444" matchingRoleId="11" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>
+	<Dungeon id="9754" name="Глубинный Харм" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="450" matchingRoleId="17" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>
+	<Dungeon id="9055" name="Алчное ущелье" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="444" matchingRoleId="11" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>
+	<!--Dungeon id="9054" name="사악한 오르카의 신전" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="423" matchingRoleId="17" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>-->
+	<!--<Dungeon id="9716" name="엘카라스 호" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="438" matchingRoleId="17" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>-->
+	<Dungeon id="9916" name="Крейсер Сложно" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="479" matchingRoleId="17" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>
+	<!--Dungeon id="9885" name="환영의 탑" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="409" matchingRoleId="17" >
+		<NeedItem id=""/>
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1" />
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon-->
+	<!--Dungeon id="9029" name="부활한 회당" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="448" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<!--Dungeon id="9757" name="아케론의 염옥" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="190" matchingRoleId="26">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="96964" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="96967" itemAmount="1"/>
+	</Dungeon-->
+	<Dungeon id="9057" name="오만한 아케론의 염옥" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="461" matchingRoleId="26">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9756" name="Хроноплоскость нормал" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="456" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<Dungeon id="9056" name="Хроноплоскость Хард" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="462" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9060" name="악인 켈리반의 돌격선" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="423" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<!--Dungeon id="9760" name="켈리반의 돌격선" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="444" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<!--<Dungeon id="9860" name="약화된 켈리반의 돌격선" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="412" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+  <!--Dungeon id="9059" name="Остров Мёртвых" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+	<DungeonClearCompensation itemTemplateId="150013" itemAmount="1" />
+    <DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+  </Dungeon--> <!--Остров Мёртвых --> 
+  <Dungeon id="9759" name="Остров Мёртвых (Сложно)" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="462" matchingRoleId="17">
+    <DungeonClearCompensation itemTemplateId="150013" itemAmount="1" />
+    <DungeonClearCompensation itemTemplateId="364" itemAmount="1" />
+	</Dungeon>  <!--Остров мёртвых Хард-->
+	<Dungeon id="9067" name="포악한 베르노의 실험실" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="461" matchingRoleId="29">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9767" name="베르노의 실험실(중급)" dungeonLevel="66" dungeonMinLevel="66" dungeonMaxLevel="70" minItemLevel="453" matchingRoleId="29">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<!--Dungeon id="9768" name="듀리온의 안식처" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="437" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<!--<Dungeon id="9068" name="폭군 듀리온의 안식처" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="446" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<Dungeon id="9070" name="Замок Парадоксов" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="456" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9769" name="Замок Лилит" dungeonLevel="68" dungeonMinLevel="68" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon> -->
+	<Dungeon id="9969" name="Кошмарная Лилит" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="461" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9970" name="Руины Кошмарной Абнукты" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="461" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9770" name="라켈리스의 폐허" dungeonLevel="68" dungeonMinLevel="68" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<!--Dungeon id="9950" name="파괴된 신계의 관문" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="450" matchingRoleId="30" hide="true"/-->
+	<!--<Dungeon id="9710" name="뒤틀린 라칸의 제단" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="443" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<!--Dungeon id="9980" name="무너진 벨리카 지하 관문" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="423" matchingRoleId="31">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<Dungeon id="9780" name="벨리카 지하 관문" dungeonLevel="68" dungeonMinLevel="68" dungeonMaxLevel="70" minItemLevel="450" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9981" name="함락된 벨릭의 신전" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="450" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<Dungeon id="9781" name="벨릭의 신전" dungeonLevel="68" dungeonMinLevel="68" dungeonMaxLevel="70" minItemLevel="451" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!---->
+	<Dungeon id="9066" name="Рулетка Демороса" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="460" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9794" name="사이럭스 연구 기지" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9994" name="알파 사이럭스 연구 기지" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="460" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9735" name="RK-9 격납고" dungeonLevel="68" dungeonMinLevel="68" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9935" name="RK-9 격납고" dungeonLevel="70" dungeonMinLevel="69" dungeonMaxLevel="70" minItemLevel="460" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9739" name="혁명단 은거지" dungeonLevel="68" dungeonMinLevel="68" dungeonMaxLevel="70" minItemLevel="452" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9939" name="삼엄한 혁명단 은거지" dungeonLevel="70" dungeonMinLevel="69" dungeonMaxLevel="70" minItemLevel="460" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9720" name="안타로스의 심연" dungeonLevel="69" dungeonMinLevel="69" dungeonMaxLevel="70" minItemLevel="453" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<Dungeon id="9920" name="공허한 안타로스의 심연" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="456" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--Dungeon id="9783" name="테네브리스 성채" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="436" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon-->
+	<Dungeon id="9983" name="칠흑의 테네브리스 성채" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="461" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9782" name="Мастерская Леандра" dungeonLevel="69" dungeonMinLevel="69" dungeonMaxLevel="70" minItemLevel="453" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9982" name="Заброшенная Мастерская Леандра" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="456" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="9044" name="Святилище Бахаара" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="463" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<!--<Dungeon id="3018" name="칠흑의 테네브리스 성채(7인)" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="444" matchingRoleId="29">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<!--<Dungeon id="3019" name="왜곡된 리안의 지하 전당(7인)" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="446" matchingRoleId="29">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<!--<Dungeon id="3017" name="공허한 안타로스의 심연(7인)" dungeonLevel="65" dungeonMinLevel="65" dungeonMaxLevel="70" minItemLevel="447" matchingRoleId="29">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>-->
+	<Dungeon id="3101" name="파르퀴나의 둥지" dungeonLevel="69" dungeonMinLevel="69" dungeonMaxLevel="70" minItemLevel="453" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="3201" name="찬란한 파르퀴나의 둥지" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="456" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="3023" name="Берарк" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="456" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="3026" name="Логово Келсаика" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="461" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="3126" name="Логово Келсаика Хард" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="480" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>
+	<Dungeon id="3027" name="Арена Безумия" dungeonLevel="70" dungeonMinLevel="70" dungeonMaxLevel="70" minItemLevel="463" matchingRoleId="17">
+		<DungeonClearCompensation itemTemplateId="411" itemAmount="1"/>
+		<DungeonClearCompensation itemTemplateId="364" itemAmount="1"/>
+	</Dungeon>	
+</DungeonMatching>
